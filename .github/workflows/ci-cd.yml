@@ -13,10 +13,11 @@ permissions:
   contents: read
 
 env:
-  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/atividade-pratica
+  IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/ci_cd_github_actions
 
 jobs:
   build:
+    name: Build e testes
     runs-on: ubuntu-latest
 
     steps:
@@ -34,9 +35,9 @@ jobs:
       - name: Preparar Maven Wrapper
         working-directory: atividade-pratica
         run: |
-          ls -la
-          ls -la .mvn/wrapper || true
-          sed -i 's/\r$//' mvnw
+          # O mvnw so le a ultima linha do properties se ela terminar com quebra de linha
+          [ -z "$(tail -c1 .mvn/wrapper/maven-wrapper.properties)" ] || echo >> .mvn/wrapper/maven-wrapper.properties
+          sed -i 's/\r$//' mvnw .mvn/wrapper/maven-wrapper.properties
           chmod +x mvnw
 
       - name: Compilar e testar
@@ -51,6 +52,7 @@ jobs:
           if-no-files-found: error
 
   docker:
+    name: Docker build e push
     needs: build
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest

@@ -1,6 +1,7 @@
-<<<<<<< HEAD
 HELP.md
 target/
+*.class
+*.war
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -32,14 +33,3 @@ build/
 
 ### VS Code ###
 .vscode/
-=======
-target/
-*.class
-*.jar
-*.war
-.mvn/
-!.mvn/wrapper/maven-wrapper.jar
-!.mvn/wrapper/maven-wrapper.properties
-.idea/
-*.iml
->>>>>>> 844bd8c (Atualiza configuracao CI-CD)

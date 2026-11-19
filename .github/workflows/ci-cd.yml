@@ -35,4 +35,4 @@ jobs:
         working-directory: atividade-pratica
         run: |
           chmod +x mvnw
-          ./mvnw -B clean verify
+          bash -x ./mvnw -B -ntp clean verify
